@@ -1,4 +1,4 @@
-import { Link } from "@tanstack/react-router";
+import { Link, useRouter } from "@tanstack/react-router";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -8,6 +8,7 @@ import { Button } from "@/components/ui/button";
 const letters = site.brand.split("");
 
 export function PanoramaIntro() {
+  const router = useRouter();
   const reducedMotion = useReducedMotion();
   const [exiting, setExiting] = useState(false);
   const [counter, setCounter] = useState(0);
@@ -16,17 +17,13 @@ export function PanoramaIntro() {
     if (exiting) return;
     sessionStorage.setItem("fischer_intro_seen", "true");
     setExiting(true);
-    if (reducedMotion) {
-      window.location.assign("/home");
-      return;
-    }
-    const transitionId = window.setTimeout(() => { window.location.assign("/home"); }, 900);
+    const transitionId = window.setTimeout(() => { void router.navigate({ to: "/home" }); }, reducedMotion ? 0 : 900);
     return () => window.clearTimeout(transitionId);
   };
 
   useEffect(() => {
     if (sessionStorage.getItem("fischer_intro_seen")) {
-      window.location.replace("/home");
+      void router.navigate({ to: "/home", replace: true });
       return;
     }
     if (reducedMotion) {
@@ -42,13 +39,13 @@ export function PanoramaIntro() {
     frameId = requestAnimationFrame(update);
     const advanceId = window.setTimeout(() => {
       sessionStorage.setItem("fischer_intro_seen", "true");
-      window.location.assign("/home");
+      void router.navigate({ to: "/home" });
     }, 10000);
     return () => {
       cancelAnimationFrame(frameId);
       window.clearTimeout(advanceId);
     };
-  }, [reducedMotion]);
+  }, [reducedMotion, router]);
 
   const cinematic = !reducedMotion;
   return (
