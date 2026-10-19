@@ -11,3 +11,4 @@
 
 - Farm marketing pages share `src/components/farm-site.tsx` so navigation, contact details, imagery, and the visual language stay consistent across all visitor paths.
 - The entry experience lives in `src/components/panorama-intro.tsx` while `src/content.ts` centralizes brand copy and swappable imagery; this keeps the cinematic intro isolated from shared marketing pages.
+- Shared visitor navigation and footer behavior lives in `src/components/farm-site.tsx` so all farm pages retain the same wayfinding, contact details, and seasonal sign-up experience.
