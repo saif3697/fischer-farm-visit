@@ -106,7 +106,7 @@ function RootShell({ children }: { children: ReactNode }) {
       </head>
       <body>
         <SiteHeader />
-        <main>{children}</main>
+        <main id="main-content" tabIndex={-1}>{children}</main>
         <SiteFooter />
         <Scripts />
       </body>
