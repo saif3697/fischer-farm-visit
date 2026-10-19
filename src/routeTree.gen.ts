@@ -10,10 +10,14 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as AgricultureRouteImport } from './routes/agriculture'
+import { Route as CampingRouteImport } from './routes/camping'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as FarmStayRouteImport } from './routes/farm-stay'
+import { Route as HarvestRouteImport } from './routes/harvest'
 import { Route as HomeRouteImport } from './routes/home'
 import { Route as HoneyRouteImport } from './routes/honey'
+import { Route as InvestmentRouteImport } from './routes/investment'
 import { Route as StoryRouteImport } from './routes/story'
 import { Route as StrawberriesRouteImport } from './routes/strawberries'
 import { Route as VisitRouteImport } from './routes/visit'
@@ -21,6 +25,16 @@ import { Route as VisitRouteImport } from './routes/visit'
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const AgricultureRoute = AgricultureRouteImport.update({
+  id: '/agriculture',
+  path: '/agriculture',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const CampingRoute = CampingRouteImport.update({
+  id: '/camping',
+  path: '/camping',
   getParentRoute: () => rootRouteImport,
 } as any)
 const EventsRoute = EventsRouteImport.update({
@@ -33,6 +47,11 @@ const FarmStayRoute = FarmStayRouteImport.update({
   path: '/farm-stay',
   getParentRoute: () => rootRouteImport,
 } as any)
+const HarvestRoute = HarvestRouteImport.update({
+  id: '/harvest',
+  path: '/harvest',
+  getParentRoute: () => rootRouteImport,
+} as any)
 const HomeRoute = HomeRouteImport.update({
   id: '/home',
   path: '/home',
@@ -41,6 +60,11 @@ const HomeRoute = HomeRouteImport.update({
 const HoneyRoute = HoneyRouteImport.update({
   id: '/honey',
   path: '/honey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const InvestmentRoute = InvestmentRouteImport.update({
+  id: '/investment',
+  path: '/investment',
   getParentRoute: () => rootRouteImport,
 } as any)
 const StoryRoute = StoryRouteImport.update({
@@ -61,20 +85,28 @@ const VisitRoute = VisitRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/agriculture': typeof AgricultureRoute
+  '/camping': typeof CampingRoute
   '/events': typeof EventsRoute
   '/farm-stay': typeof FarmStayRoute
+  '/harvest': typeof HarvestRoute
   '/home': typeof HomeRoute
   '/honey': typeof HoneyRoute
+  '/investment': typeof InvestmentRoute
   '/story': typeof StoryRoute
   '/strawberries': typeof StrawberriesRoute
   '/visit': typeof VisitRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/agriculture': typeof AgricultureRoute
+  '/camping': typeof CampingRoute
   '/events': typeof EventsRoute
   '/farm-stay': typeof FarmStayRoute
+  '/harvest': typeof HarvestRoute
   '/home': typeof HomeRoute
   '/honey': typeof HoneyRoute
+  '/investment': typeof InvestmentRoute
   '/story': typeof StoryRoute
   '/strawberries': typeof StrawberriesRoute
   '/visit': typeof VisitRoute
@@ -82,10 +114,14 @@ export interface FileRoutesByTo {
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/agriculture': typeof AgricultureRoute
+  '/camping': typeof CampingRoute
   '/events': typeof EventsRoute
   '/farm-stay': typeof FarmStayRoute
+  '/harvest': typeof HarvestRoute
   '/home': typeof HomeRoute
   '/honey': typeof HoneyRoute
+  '/investment': typeof InvestmentRoute
   '/story': typeof StoryRoute
   '/strawberries': typeof StrawberriesRoute
   '/visit': typeof VisitRoute
@@ -94,30 +130,42 @@ export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
   fullPaths:
     | '/'
+    | '/agriculture'
+    | '/camping'
     | '/events'
     | '/farm-stay'
+    | '/harvest'
     | '/home'
     | '/honey'
+    | '/investment'
     | '/story'
     | '/strawberries'
     | '/visit'
   fileRoutesByTo: FileRoutesByTo
   to:
     | '/'
+    | '/agriculture'
+    | '/camping'
     | '/events'
     | '/farm-stay'
+    | '/harvest'
     | '/home'
     | '/honey'
+    | '/investment'
     | '/story'
     | '/strawberries'
     | '/visit'
   id:
     | '__root__'
     | '/'
+    | '/agriculture'
+    | '/camping'
     | '/events'
     | '/farm-stay'
+    | '/harvest'
     | '/home'
     | '/honey'
+    | '/investment'
     | '/story'
     | '/strawberries'
     | '/visit'
@@ -125,10 +173,14 @@ export interface FileRouteTypes {
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  AgricultureRoute: typeof AgricultureRoute
+  CampingRoute: typeof CampingRoute
   EventsRoute: typeof EventsRoute
   FarmStayRoute: typeof FarmStayRoute
+  HarvestRoute: typeof HarvestRoute
   HomeRoute: typeof HomeRoute
   HoneyRoute: typeof HoneyRoute
+  InvestmentRoute: typeof InvestmentRoute
   StoryRoute: typeof StoryRoute
   StrawberriesRoute: typeof StrawberriesRoute
   VisitRoute: typeof VisitRoute
@@ -141,6 +193,20 @@ declare module '@tanstack/react-router' {
       path: '/'
       fullPath: '/'
       preLoaderRoute: typeof IndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/agriculture': {
+      id: '/agriculture'
+      path: '/agriculture'
+      fullPath: '/agriculture'
+      preLoaderRoute: typeof AgricultureRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/camping': {
+      id: '/camping'
+      path: '/camping'
+      fullPath: '/camping'
+      preLoaderRoute: typeof CampingRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/events': {
@@ -157,6 +223,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof FarmStayRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/harvest': {
+      id: '/harvest'
+      path: '/harvest'
+      fullPath: '/harvest'
+      preLoaderRoute: typeof HarvestRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/home': {
       id: '/home'
       path: '/home'
@@ -169,6 +242,13 @@ declare module '@tanstack/react-router' {
       path: '/honey'
       fullPath: '/honey'
       preLoaderRoute: typeof HoneyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/investment': {
+      id: '/investment'
+      path: '/investment'
+      fullPath: '/investment'
+      preLoaderRoute: typeof InvestmentRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/story': {
@@ -197,10 +277,14 @@ declare module '@tanstack/react-router' {
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  AgricultureRoute: AgricultureRoute,
+  CampingRoute: CampingRoute,
   EventsRoute: EventsRoute,
   FarmStayRoute: FarmStayRoute,
+  HarvestRoute: HarvestRoute,
   HomeRoute: HomeRoute,
   HoneyRoute: HoneyRoute,
+  InvestmentRoute: InvestmentRoute,
   StoryRoute: StoryRoute,
   StrawberriesRoute: StrawberriesRoute,
   VisitRoute: VisitRoute,
