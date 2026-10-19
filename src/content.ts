@@ -1,7 +1,7 @@
 import domeImage from "@/assets/fischer-dome.jpg";
 import heroImage from "@/assets/fischer-hero.jpg";
-import strawberryPortrait from "@/assets/fischer-strawberries.jpg.asset.json";
-import fieldPortrait from "@/assets/fischer-field-portrait.jpg.asset.json";
+import plantingCloseup from "@/assets/fischer-planting-closeup.jpg.asset.json";
+import plantingField from "@/assets/fischer-planting-field.jpg.asset.json";
 
 export const site = {
   brand: "FISCHER FARMS",
@@ -19,8 +19,8 @@ export const site = {
     intro: heroImage,
     strawberryField: heroImage,
     domeHouse: domeImage,
-    strawberryPortrait: strawberryPortrait.url,
-    fieldPortrait: fieldPortrait.url,
+    strawberryPortrait: plantingCloseup.url,
+    fieldPortrait: plantingField.url,
   },
   introStory: {
     eyebrow: "A quiet investment in the land",
