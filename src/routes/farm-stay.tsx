@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { DetailPage } from "@/components/farm-site";
+export const Route = createFileRoute("/farm-stay")({ head: () => ({ meta: [{ title: "Farm Stay | Fischer Farms" }, { name: "description", content: "Discover an intimate dome-house stay beneath the North Dakota sky." }, { property: "og:title", content: "Farm Stay | Fischer Farms" }, { property: "og:description", content: "Discover an intimate dome-house stay beneath the North Dakota sky." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: () => <DetailPage page="/farm-stay" /> });

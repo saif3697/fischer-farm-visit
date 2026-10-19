@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { DetailPage } from "@/components/farm-site";
+export const Route = createFileRoute("/strawberries")({ head: () => ({ meta: [{ title: "U-Pick Strawberries | Fischer Farms" }, { name: "description", content: "Plan a sun-warmed U-pick strawberry day at Fischer Farms." }, { property: "og:title", content: "U-Pick Strawberries | Fischer Farms" }, { property: "og:description", content: "Plan a sun-warmed U-pick strawberry day at Fischer Farms." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: () => <DetailPage page="/strawberries" /> });
