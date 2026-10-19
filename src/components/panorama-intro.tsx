@@ -1,5 +1,6 @@
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useMemo, useState, type MouseEvent } from "react";
+import { useNavigate } from "@tanstack/react-router";
 
 import { site } from "@/content";
 
@@ -8,6 +9,7 @@ const easing = [0.16, 1, 0.3, 1] as const;
 
 export function PanoramaIntro() {
   const reducedMotion = useReducedMotion();
+  const navigate = useNavigate();
   const [entered, setEntered] = useState(false);
   const [pointer, setPointer] = useState({ x: 0, y: 0 });
   const [buttonOffset, setButtonOffset] = useState({ x: 0, y: 0 });
@@ -31,6 +33,14 @@ export function PanoramaIntro() {
     setButtonOffset({ x: ((event.clientX - bounds.left) / bounds.width - 0.5) * 12, y: ((event.clientY - bounds.top) / bounds.height - 0.5) * 12 });
   };
 
+  useEffect(() => {
+    if (!entered) return;
+    const transitionId = window.setTimeout(() => {
+      navigate({ to: "/home" });
+    }, reducedMotion ? 0 : 800);
+    return () => window.clearTimeout(transitionId);
+  }, [entered, navigate, reducedMotion]);
+
   return (
     <AnimatePresence>
       <motion.section className="panorama-intro" aria-label="Fischer Farms entry" onPointerMove={handlePointerMove}>
@@ -48,7 +58,6 @@ export function PanoramaIntro() {
         </motion.div>
         <motion.p className="intro-credit" initial={reducedMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reducedMotion ? 0 : 0.55, delay: reducedMotion ? 0 : 2.8, ease: easing }}>WADE &amp; BREANN FISCHER</motion.p>
         <motion.div className="intro-curtain" aria-hidden="true" initial={{ clipPath: "inset(100% 0 0 0)" }} animate={entered ? { clipPath: "inset(0% 0 0 0)" } : false} transition={{ duration: reducedMotion ? 0 : 0.8, ease: [0.65, 0, 0.35, 1] }} />
-        {entered && <motion.div className="intro-coming" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: reducedMotion ? 0 : 0.55 }}><p>Coming soon…</p></motion.div>}
       </motion.section>
     </AnimatePresence>
   );
