@@ -10,3 +10,4 @@
 <!-- LOVABLE:END -->
 
 - The standalone entry experience lives in `src/components/panorama-intro.tsx`; keep its animation and interactions self-contained so it remains a single full-viewport page.
+- The entry page reads its user-swappable copy and media URLs from `src/content.ts`; keep new entry content centralized there.
