@@ -16,7 +16,12 @@ export function PanoramaIntro() {
     if (exiting) return;
     sessionStorage.setItem("fischer_intro_seen", "true");
     setExiting(true);
-    window.setTimeout(() => { window.location.assign("/home"); }, reducedMotion ? 0 : 900);
+    if (reducedMotion) {
+      window.location.assign("/home");
+      return;
+    }
+    const transitionId = window.setTimeout(() => { window.location.assign("/home"); }, 900);
+    return () => window.clearTimeout(transitionId);
   };
 
   useEffect(() => {
