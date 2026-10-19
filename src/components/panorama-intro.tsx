@@ -20,10 +20,6 @@ export function PanoramaIntro() {
   };
 
   useEffect(() => {
-    if (sessionStorage.getItem("fischer_intro_seen")) {
-      window.location.href = "/home";
-      return;
-    }
     if (reducedMotion) {
       setCounter(100);
       return;
