@@ -59,8 +59,8 @@ export function PanoramaIntro() {
   }, []);
 
   const galleryItems: GalleryItem[] = [
-    { src: site.images.strawberryPortrait, alt: "A Fischer Farms grower picking ripe strawberries in the field", label: "Photo 01 · Strawberry field", caption: "Organic strawberries, grown close to the soil." },
-    { src: site.images.fieldPortrait, alt: "A Fischer Farms grower holding a harvest of strawberries", label: "Photo 02 · Fresh harvest", caption: "A seasonal return to something real." },
+    { src: site.images.strawberryPortrait, alt: "A Fischer Farms grower planting in a field with a hand trowel", label: "Photo 01 · Planting by hand", caption: "Care begins at the soil." },
+    { src: site.images.fieldPortrait, alt: "A Fischer Farms grower setting young plants into the soil", label: "Photo 02 · Growing together", caption: "Every season starts with the land." },
   ];
 
   return (
