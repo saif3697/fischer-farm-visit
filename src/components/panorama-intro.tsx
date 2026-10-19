@@ -17,12 +17,12 @@ export function PanoramaIntro() {
     if (exiting) return;
     sessionStorage.setItem("fischer_intro_seen", "true");
     setExiting(true);
-    window.setTimeout(() => void navigate({ to: "/home" }), reducedMotion ? 0 : 900);
+    window.setTimeout(() => { window.location.assign("/home"); }, reducedMotion ? 0 : 900);
   };
 
   useEffect(() => {
     if (sessionStorage.getItem("fischer_intro_seen")) {
-      void navigate({ to: "/home", replace: true });
+      window.location.replace("/home");
       return;
     }
     if (reducedMotion) {
@@ -41,7 +41,7 @@ export function PanoramaIntro() {
       cancelAnimationFrame(frameId);
       window.clearTimeout(advanceId);
     };
-  }, [navigate, reducedMotion]);
+  }, [reducedMotion]);
 
   const cinematic = !reducedMotion;
   return (
