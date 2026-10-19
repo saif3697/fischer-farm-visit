@@ -8,3 +8,5 @@
 > Commits you push to the connected branch sync back to Lovable and show up in
 > the editor, so keep the branch in a working state.
 <!-- LOVABLE:END -->
+
+- Farm marketing pages share `src/components/farm-site.tsx` so navigation, contact details, imagery, and the visual language stay consistent across all visitor paths.

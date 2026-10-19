@@ -1,0 +1,3 @@
+import { createFileRoute } from "@tanstack/react-router";
+import { DetailPage } from "@/components/farm-site";
+export const Route = createFileRoute("/honey")({ head: () => ({ meta: [{ title: "Local Honey | Fischer Farms" }, { name: "description", content: "Discover small-batch local honey from Fischer Farms." }, { property: "og:title", content: "Local Honey | Fischer Farms" }, { property: "og:description", content: "Discover small-batch local honey from Fischer Farms." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }), component: () => <DetailPage page="/honey" /> });
