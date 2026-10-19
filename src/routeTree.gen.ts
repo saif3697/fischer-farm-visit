@@ -10,33 +10,115 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as EventsRouteImport } from './routes/events'
+import { Route as FarmStayRouteImport } from './routes/farm-stay'
+import { Route as HoneyRouteImport } from './routes/honey'
+import { Route as StoryRouteImport } from './routes/story'
+import { Route as StrawberriesRouteImport } from './routes/strawberries'
+import { Route as VisitRouteImport } from './routes/visit'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const EventsRoute = EventsRouteImport.update({
+  id: '/events',
+  path: '/events',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FarmStayRoute = FarmStayRouteImport.update({
+  id: '/farm-stay',
+  path: '/farm-stay',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HoneyRoute = HoneyRouteImport.update({
+  id: '/honey',
+  path: '/honey',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StoryRoute = StoryRouteImport.update({
+  id: '/story',
+  path: '/story',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const StrawberriesRoute = StrawberriesRouteImport.update({
+  id: '/strawberries',
+  path: '/strawberries',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const VisitRoute = VisitRouteImport.update({
+  id: '/visit',
+  path: '/visit',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/events': typeof EventsRoute
+  '/farm-stay': typeof FarmStayRoute
+  '/honey': typeof HoneyRoute
+  '/story': typeof StoryRoute
+  '/strawberries': typeof StrawberriesRoute
+  '/visit': typeof VisitRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/events': typeof EventsRoute
+  '/farm-stay': typeof FarmStayRoute
+  '/honey': typeof HoneyRoute
+  '/story': typeof StoryRoute
+  '/strawberries': typeof StrawberriesRoute
+  '/visit': typeof VisitRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/events': typeof EventsRoute
+  '/farm-stay': typeof FarmStayRoute
+  '/honey': typeof HoneyRoute
+  '/story': typeof StoryRoute
+  '/strawberries': typeof StrawberriesRoute
+  '/visit': typeof VisitRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/'
+  fullPaths:
+    | '/'
+    | '/events'
+    | '/farm-stay'
+    | '/honey'
+    | '/story'
+    | '/strawberries'
+    | '/visit'
   fileRoutesByTo: FileRoutesByTo
-  to: '/'
-  id: '__root__' | '/'
+  to:
+    | '/'
+    | '/events'
+    | '/farm-stay'
+    | '/honey'
+    | '/story'
+    | '/strawberries'
+    | '/visit'
+  id:
+    | '__root__'
+    | '/'
+    | '/events'
+    | '/farm-stay'
+    | '/honey'
+    | '/story'
+    | '/strawberries'
+    | '/visit'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  EventsRoute: typeof EventsRoute
+  FarmStayRoute: typeof FarmStayRoute
+  HoneyRoute: typeof HoneyRoute
+  StoryRoute: typeof StoryRoute
+  StrawberriesRoute: typeof StrawberriesRoute
+  VisitRoute: typeof VisitRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -48,11 +130,59 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/events': {
+      id: '/events'
+      path: '/events'
+      fullPath: '/events'
+      preLoaderRoute: typeof EventsRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/farm-stay': {
+      id: '/farm-stay'
+      path: '/farm-stay'
+      fullPath: '/farm-stay'
+      preLoaderRoute: typeof FarmStayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/honey': {
+      id: '/honey'
+      path: '/honey'
+      fullPath: '/honey'
+      preLoaderRoute: typeof HoneyRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/story': {
+      id: '/story'
+      path: '/story'
+      fullPath: '/story'
+      preLoaderRoute: typeof StoryRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/strawberries': {
+      id: '/strawberries'
+      path: '/strawberries'
+      fullPath: '/strawberries'
+      preLoaderRoute: typeof StrawberriesRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/visit': {
+      id: '/visit'
+      path: '/visit'
+      fullPath: '/visit'
+      preLoaderRoute: typeof VisitRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  EventsRoute: EventsRoute,
+  FarmStayRoute: FarmStayRoute,
+  HoneyRoute: HoneyRoute,
+  StoryRoute: StoryRoute,
+  StrawberriesRoute: StrawberriesRoute,
+  VisitRoute: VisitRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)
