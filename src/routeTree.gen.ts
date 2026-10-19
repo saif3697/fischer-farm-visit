@@ -12,6 +12,7 @@ import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
 import { Route as EventsRouteImport } from './routes/events'
 import { Route as FarmStayRouteImport } from './routes/farm-stay'
+import { Route as HomeRouteImport } from './routes/home'
 import { Route as HoneyRouteImport } from './routes/honey'
 import { Route as StoryRouteImport } from './routes/story'
 import { Route as StrawberriesRouteImport } from './routes/strawberries'
@@ -30,6 +31,11 @@ const EventsRoute = EventsRouteImport.update({
 const FarmStayRoute = FarmStayRouteImport.update({
   id: '/farm-stay',
   path: '/farm-stay',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const HomeRoute = HomeRouteImport.update({
+  id: '/home',
+  path: '/home',
   getParentRoute: () => rootRouteImport,
 } as any)
 const HoneyRoute = HoneyRouteImport.update({
@@ -57,6 +63,7 @@ export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
   '/events': typeof EventsRoute
   '/farm-stay': typeof FarmStayRoute
+  '/home': typeof HomeRoute
   '/honey': typeof HoneyRoute
   '/story': typeof StoryRoute
   '/strawberries': typeof StrawberriesRoute
@@ -66,6 +73,7 @@ export interface FileRoutesByTo {
   '/': typeof IndexRoute
   '/events': typeof EventsRoute
   '/farm-stay': typeof FarmStayRoute
+  '/home': typeof HomeRoute
   '/honey': typeof HoneyRoute
   '/story': typeof StoryRoute
   '/strawberries': typeof StrawberriesRoute
@@ -76,6 +84,7 @@ export interface FileRoutesById {
   '/': typeof IndexRoute
   '/events': typeof EventsRoute
   '/farm-stay': typeof FarmStayRoute
+  '/home': typeof HomeRoute
   '/honey': typeof HoneyRoute
   '/story': typeof StoryRoute
   '/strawberries': typeof StrawberriesRoute
@@ -87,6 +96,7 @@ export interface FileRouteTypes {
     | '/'
     | '/events'
     | '/farm-stay'
+    | '/home'
     | '/honey'
     | '/story'
     | '/strawberries'
@@ -96,6 +106,7 @@ export interface FileRouteTypes {
     | '/'
     | '/events'
     | '/farm-stay'
+    | '/home'
     | '/honey'
     | '/story'
     | '/strawberries'
@@ -105,6 +116,7 @@ export interface FileRouteTypes {
     | '/'
     | '/events'
     | '/farm-stay'
+    | '/home'
     | '/honey'
     | '/story'
     | '/strawberries'
@@ -115,6 +127,7 @@ export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
   EventsRoute: typeof EventsRoute
   FarmStayRoute: typeof FarmStayRoute
+  HomeRoute: typeof HomeRoute
   HoneyRoute: typeof HoneyRoute
   StoryRoute: typeof StoryRoute
   StrawberriesRoute: typeof StrawberriesRoute
@@ -142,6 +155,13 @@ declare module '@tanstack/react-router' {
       path: '/farm-stay'
       fullPath: '/farm-stay'
       preLoaderRoute: typeof FarmStayRouteImport
+      parentRoute: typeof rootRouteImport
+    }
+    '/home': {
+      id: '/home'
+      path: '/home'
+      fullPath: '/home'
+      preLoaderRoute: typeof HomeRouteImport
       parentRoute: typeof rootRouteImport
     }
     '/honey': {
@@ -179,6 +199,7 @@ const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
   EventsRoute: EventsRoute,
   FarmStayRoute: FarmStayRoute,
+  HomeRoute: HomeRoute,
   HoneyRoute: HoneyRoute,
   StoryRoute: StoryRoute,
   StrawberriesRoute: StrawberriesRoute,
