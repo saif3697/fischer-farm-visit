@@ -20,4 +20,10 @@ describe("App routing", () => {
 
     expect(router.matchRoutes("/home").at(-1)?.routeId).not.toBe(rootRouteId);
   });
+
+  it.each(["/agriculture", "/harvest", "/camping", "/investment"])("matches the new farm experience page %s", (path) => {
+    const router = createRouter({ routeTree, context: { queryClient: new QueryClient() } });
+
+    expect(router.matchRoutes(path).at(-1)?.routeId).not.toBe(rootRouteId);
+  });
 });

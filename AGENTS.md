@@ -11,3 +11,4 @@
 
 - The standalone entry experience lives in `src/components/panorama-intro.tsx`; keep its animation and interactions self-contained, with the entry view filling the first viewport and its story continuing below.
 - The entry page reads its user-swappable copy and media URLs from `src/content.ts`; keep new entry content centralized there.
+- New farm-experience pages use `src/components/experience-page.tsx` with their editable content in `src/content.ts`, keeping the page structure and copy consistent.
