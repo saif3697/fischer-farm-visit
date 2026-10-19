@@ -59,8 +59,8 @@ export function PanoramaIntro() {
   }, []);
 
   const galleryItems: GalleryItem[] = [
-    { src: site.images.strawberryPortrait, alt: "A Fischer Farms grower picking ripe strawberries in the field", label: "01 · Strawberries", caption: "Organic strawberries, grown close to the soil." },
-    { src: site.images.fieldPortrait, alt: "A Fischer Farms grower holding a harvest of strawberries", label: "02 · The harvest", caption: "A seasonal return to something real." },
+    { src: site.images.strawberryPortrait, alt: "A Fischer Farms grower picking ripe strawberries in the field", label: "Photo 01 · Strawberry field", caption: "Organic strawberries, grown close to the soil." },
+    { src: site.images.fieldPortrait, alt: "A Fischer Farms grower holding a harvest of strawberries", label: "Photo 02 · Fresh harvest", caption: "A seasonal return to something real." },
   ];
 
   return (
@@ -79,7 +79,7 @@ export function PanoramaIntro() {
             <motion.p className="intro-subtitle" initial={reducedMotion ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reducedMotion ? 0 : 0.6, delay: reducedMotion ? 0 : 2.2, ease: easing }}>Organic Farm · Honey · Farm Stay · Strawberries</motion.p>
           </motion.div>
         </motion.div>
-        <motion.div className="intro-gallery" initial={reducedMotion ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: reducedMotion ? 0 : 0.6, delay: reducedMotion ? 0 : 2.4 }}>
+        <motion.div className="intro-gallery" aria-label="Fischer Farms photo gallery" initial={reducedMotion ? false : { opacity: 0 }} animate={{ opacity: 1 }} transition={{ duration: reducedMotion ? 0 : 0.6, delay: reducedMotion ? 0 : 2.4 }}>
           {galleryItems.map((item, index) => <motion.button key={item.label} type="button" className="intro-photo" onClick={() => setActiveImage(item)} initial={reducedMotion ? false : { clipPath: "inset(0 0 100% 0)", y: 40, scale: 1.08 }} animate={{ clipPath: "inset(0 0 0% 0)", y: 0, scale: 1 }} transition={{ duration: reducedMotion ? 0 : 0.8, delay: reducedMotion ? 0 : 2.55 + index * 0.15, ease: easing }}>
             <motion.img src={item.src} alt={item.alt} animate={reducedMotion ? false : { scale: [1, 1.06, 1] }} transition={{ duration: 12, repeat: Infinity, repeatType: "reverse", ease: "easeInOut" }} />
             <span className="intro-photo-shade" aria-hidden="true" /><span className="intro-photo-label">{item.label}</span><span className="intro-photo-arrow" aria-hidden="true"><ArrowUpRight size={16} /></span>
