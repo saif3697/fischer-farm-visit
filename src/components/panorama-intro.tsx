@@ -1,75 +1,54 @@
-import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState, type MouseEvent } from "react";
 
 import { site } from "@/content";
 
-const letters = site.brand.split("");
+const titleLines = ["FISCHER", "FARMS"];
+const easing = [0.16, 1, 0.3, 1] as const;
 
 export function PanoramaIntro() {
   const reducedMotion = useReducedMotion();
-  const [exiting, setExiting] = useState(false);
-  const [counter, setCounter] = useState(0);
+  const [entered, setEntered] = useState(false);
+  const [pointer, setPointer] = useState({ x: 0, y: 0 });
+  const [buttonOffset, setButtonOffset] = useState({ x: 0, y: 0 });
+  const particles = useMemo(() => Array.from({ length: 26 }, (_, index) => ({
+    id: index,
+    left: `${(index * 37 + 11) % 100}%`,
+    top: `${(index * 53 + 7) % 100}%`,
+    duration: 8 + (index % 7) * 1.7,
+    delay: (index % 6) * -1.2,
+  })), []);
 
-  const enterFarm = () => {
-    if (exiting) return;
-    sessionStorage.setItem("fischer_intro_seen", "true");
-    setExiting(true);
-    const transitionId = window.setTimeout(() => { window.location.href = "/home"; }, reducedMotion ? 0 : 900);
-    return () => window.clearTimeout(transitionId);
+  const handlePointerMove = (event: MouseEvent<HTMLElement>) => {
+    if (reducedMotion) return;
+    const { innerWidth, innerHeight } = window;
+    setPointer({ x: (event.clientX / innerWidth - 0.5) * 24, y: (event.clientY / innerHeight - 0.5) * 24 });
   };
 
-  useEffect(() => {
-    if (reducedMotion) {
-      setCounter(100);
-      return;
-    }
-    const startedAt = performance.now();
-    let frameId = 0;
-    const update = (time: number) => {
-      setCounter(Math.min(100, Math.round(((time - startedAt) / 4200) * 100)));
-      if (time - startedAt < 4200) frameId = requestAnimationFrame(update);
-    };
-    frameId = requestAnimationFrame(update);
-    const advanceId = window.setTimeout(() => {
-      sessionStorage.setItem("fischer_intro_seen", "true");
-      window.location.href = "/home";
-    }, 10000);
-    return () => {
-      cancelAnimationFrame(frameId);
-      window.clearTimeout(advanceId);
-    };
-  }, [reducedMotion]);
+  const handleButtonMove = (event: MouseEvent<HTMLButtonElement>) => {
+    if (reducedMotion) return;
+    const bounds = event.currentTarget.getBoundingClientRect();
+    setButtonOffset({ x: ((event.clientX - bounds.left) / bounds.width - 0.5) * 12, y: ((event.clientY - bounds.top) / bounds.height - 0.5) * 12 });
+  };
 
-  const cinematic = !reducedMotion;
   return (
     <AnimatePresence>
-      <motion.section className="panorama-intro" aria-label="Fischer Farms introduction" exit={{ opacity: 0 }}>
-        <motion.div className="intro-line" initial={cinematic ? { scaleX: 0 } : false} animate={{ scaleX: 1 }} transition={{ duration: 0.8, delay: 0.2, ease: [0.16, 1, 0.3, 1] }} />
-        <motion.img
-          className="intro-image"
-          src={site.images.intro}
-          alt="Golden-hour strawberry field at Fischer Farms"
-          initial={cinematic ? { clipPath: "inset(50% 0 50% 0)", scale: 1.25, x: "-4%" } : false}
-          animate={exiting ? { scale: 1.4, filter: "blur(14px)", opacity: 0 } : { clipPath: "inset(0% 0 0% 0)", scale: 1, x: "0%" }}
-          transition={exiting ? { duration: 0.9, ease: [0.65, 0, 0.35, 1] } : { duration: 1.4, delay: cinematic ? 1.6 : 0, ease: [0.16, 1, 0.3, 1] }}
-        />
-        <motion.div className="intro-scrim" animate={exiting ? { clipPath: "inset(0 0 100% 0)" } : { clipPath: "inset(0 0 0 0)" }} transition={{ duration: 0.9, ease: [0.65, 0, 0.35, 1] }} />
-        <motion.p className="intro-corner intro-brand" initial={cinematic ? { opacity: 0 } : false} animate={{ opacity: 1 }} transition={{ delay: 4.2 }}>FISCHER FARMS</motion.p>
-        <motion.p className="intro-corner intro-counter" initial={cinematic ? { opacity: 0 } : false} animate={{ opacity: 1 }} transition={{ delay: 4.2 }}>{String(counter).padStart(2, "0")}</motion.p>
-        <div className="intro-copy">
-          <h1 aria-label={site.brand}>
-            {letters.map((letter, index) => <motion.span key={`${letter}-${index}`} initial={cinematic ? { y: "110%", opacity: 0 } : false} animate={exiting ? { y: "110%", opacity: 0 } : { y: "0%", opacity: 1 }} transition={{ duration: 0.65, delay: cinematic ? 2.2 + index * 0.055 : 0, ease: [0.16, 1, 0.3, 1] }}>{letter === " " ? "\u00a0" : letter}</motion.span>)}
-          </h1>
-          <motion.p className="intro-farms" initial={cinematic ? { opacity: 0, letterSpacing: "0.4em" } : false} animate={exiting ? { opacity: 0, y: 24 } : { opacity: 1, letterSpacing: "0.18em", y: 0 }} transition={{ duration: 0.8, delay: cinematic ? 2.9 : 0 }}>FARMS</motion.p>
-          <motion.div className="intro-divider" initial={cinematic ? { scaleX: 0 } : false} animate={{ scaleX: 1 }} transition={{ duration: 0.65, delay: cinematic ? 3.3 : 0 }} />
-          <motion.p className="intro-subtitle" initial={cinematic ? { opacity: 0, y: 14 } : false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: cinematic ? 3.5 : 0 }}>ORGANIC STRAWBERRY FARM · NORTH DAKOTA · WADE &amp; BREANN</motion.p>
-          <motion.div initial={cinematic ? { opacity: 0, y: 16 } : false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: cinematic ? 4 : 0 }}>
-            <Link className="intro-enter" to="/home" onClick={() => sessionStorage.setItem("fischer_intro_seen", "true")}>Enter the farm</Link>
+      <motion.section className="panorama-intro" aria-label="Fischer Farms entry" onPointerMove={handlePointerMove}>
+        <div className="intro-dust" aria-hidden="true">{particles.map((particle) => <i key={particle.id} style={{ left: particle.left, top: particle.top, animationDuration: `${particle.duration}s`, animationDelay: `${particle.delay}s` }} />)}</div>
+        <motion.div className="intro-glow" aria-hidden="true" animate={reducedMotion ? false : { opacity: [0.3, 0.75, 0.3], scale: [0.94, 1.06, 0.94] }} transition={{ duration: 9, repeat: Infinity, ease: "easeInOut" }} />
+        <motion.div className="intro-line" initial={reducedMotion ? false : { scaleX: 0 }} animate={{ scaleX: 1 }} transition={{ duration: reducedMotion ? 0 : 0.8, ease: easing }} />
+        <motion.div className="intro-reveal" initial={reducedMotion ? false : { clipPath: "inset(50% 0 50% 0)" }} animate={{ clipPath: "inset(0% 0 0% 0)" }} transition={{ duration: reducedMotion ? 0 : 1, delay: reducedMotion ? 0 : 0.8, ease: easing }}>
+          <motion.div className="intro-copy" animate={reducedMotion ? false : { x: pointer.x, y: pointer.y }} transition={{ x: { type: "spring", stiffness: 50, damping: 20 }, y: { type: "spring", stiffness: 50, damping: 20 } }}>
+            <motion.h1 aria-label={site.brand} animate={reducedMotion ? false : { scale: [1, 1.015, 1] }} transition={{ duration: 6, repeat: Infinity, ease: "easeInOut" }}>{titleLines.map((line, lineIndex) => <span className="intro-title-line" key={line}>{line.split("").map((letter, index) => <motion.span className="intro-letter" key={`${letter}-${index}`} initial={reducedMotion ? false : { y: "115%", opacity: 0 }} animate={{ y: 0, opacity: 1 }} transition={{ duration: reducedMotion ? 0 : 0.55, delay: reducedMotion ? 0 : 1 + lineIndex * 0.6 + (lineIndex === 0 ? index : line.length - 1 - index) * 0.06, ease: easing }}>{letter}</motion.span>)}</span>)}</motion.h1>
+            <motion.p className="intro-subtitle" initial={reducedMotion ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reducedMotion ? 0 : 0.6, delay: reducedMotion ? 0 : 2.2, ease: easing }}>ORGANIC STRAWBERRY FARM · NORTH DAKOTA</motion.p>
+            <motion.div initial={reducedMotion ? false : { opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reducedMotion ? 0 : 0.55, delay: reducedMotion ? 0 : 2.5, ease: easing }}>
+              <motion.button className="intro-enter" type="button" onPointerMove={handleButtonMove} onPointerLeave={() => setButtonOffset({ x: 0, y: 0 })} onClick={() => setEntered(true)} animate={{ x: buttonOffset.x, y: buttonOffset.y }} transition={{ type: "spring", stiffness: 300, damping: 18 }}>ENTER</motion.button>
+            </motion.div>
           </motion.div>
-        </div>
-        <Link className="intro-skip" to="/home" onClick={() => sessionStorage.setItem("fischer_intro_seen", "true")}>Skip <span aria-hidden="true">→</span></Link>
-        <Link className="sr-only" to="/home">Skip the introduction and enter Fischer Farms</Link>
+        </motion.div>
+        <motion.p className="intro-credit" initial={reducedMotion ? false : { opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: reducedMotion ? 0 : 0.55, delay: reducedMotion ? 0 : 2.8, ease: easing }}>WADE &amp; BREANN FISCHER</motion.p>
+        <motion.div className="intro-curtain" aria-hidden="true" initial={{ clipPath: "inset(100% 0 0 0)" }} animate={entered ? { clipPath: "inset(0% 0 0 0)" } : false} transition={{ duration: reducedMotion ? 0 : 0.8, ease: [0.65, 0, 0.35, 1] }} />
+        {entered && <motion.div className="intro-coming" initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: reducedMotion ? 0 : 0.55 }}><p>Coming soon…</p></motion.div>}
       </motion.section>
     </AnimatePresence>
   );

@@ -9,8 +9,6 @@ import {
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
-import { useRouterState } from "@tanstack/react-router";
-import { SiteFooter, SiteHeader } from "@/components/farm-site";
 
 import appCss from "../styles.css?url";
 import { reportLovableError } from "../lib/lovable-error-reporting";
@@ -85,7 +83,7 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
     links: [
       { rel: "preconnect", href: "https://fonts.googleapis.com" },
       { rel: "preconnect", href: "https://fonts.gstatic.com", crossOrigin: "anonymous" },
-      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;500;600&family=DM+Sans:wght@400;500;700&display=swap" },
+      { rel: "stylesheet", href: "https://fonts.googleapis.com/css2?family=Inter:wght@500;600;700;800;900&display=swap" },
       {
         rel: "stylesheet",
         href: appCss,
@@ -100,17 +98,13 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
-  const pathname = useRouterState({ select: (state) => state.location.pathname });
-  const isIntro = pathname === "/";
   return (
     <html lang="en">
       <head>
         <HeadContent />
       </head>
       <body>
-        {!isIntro && <SiteHeader />}
         <main id="main-content" tabIndex={-1}>{children}</main>
-        {!isIntro && <SiteFooter />}
         <Scripts />
       </body>
     </html>
