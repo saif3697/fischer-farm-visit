@@ -1,4 +1,4 @@
-import { Link, useNavigate } from "@tanstack/react-router";
+import { Link } from "@tanstack/react-router";
 import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 
@@ -8,7 +8,6 @@ import { Button } from "@/components/ui/button";
 const letters = site.brand.split("");
 
 export function PanoramaIntro() {
-  const navigate = useNavigate();
   const reducedMotion = useReducedMotion();
   const [exiting, setExiting] = useState(false);
   const [counter, setCounter] = useState(0);
@@ -36,7 +35,10 @@ export function PanoramaIntro() {
       if (time - startedAt < 4200) frameId = requestAnimationFrame(update);
     };
     frameId = requestAnimationFrame(update);
-    const advanceId = window.setTimeout(enterFarm, 10000);
+    const advanceId = window.setTimeout(() => {
+      sessionStorage.setItem("fischer_intro_seen", "true");
+      window.location.assign("/home");
+    }, 10000);
     return () => {
       cancelAnimationFrame(frameId);
       window.clearTimeout(advanceId);
