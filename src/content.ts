@@ -31,4 +31,38 @@ export const site = {
       "We are not selling produce. We are selling a return to something real. And that, in a world of screens, is the most valuable asset of all.",
     ],
   },
+  experiences: {
+    agriculture: {
+      eyebrow: "Growing with intention",
+      title: "The work begins in the soil.",
+      text: "Each row begins with patient hands, living soil, and a belief that careful growing makes every season more meaningful.",
+      image: plantingField.url,
+      imageAlt: "A Fischer Farms grower preparing soil and young plants by hand",
+      moments: ["Soil", "Planting", "Growing", "Stewardship"],
+    },
+    harvest: {
+      eyebrow: "The rhythm of the field",
+      title: "Harvest is a season you can feel.",
+      text: "From the first green shoots to baskets shared around a table, harvest brings the story of the land into every hand.",
+      image: plantingCloseup.url,
+      imageAlt: "A Fischer Farms grower planting by hand beneath an open prairie sky",
+      moments: ["Early growth", "First bloom", "Field harvest", "Sharing"],
+    },
+    camping: {
+      eyebrow: "Stay close to the sky",
+      title: "Wake up closer to the land.",
+      text: "Slow mornings, firelit evenings, and a prairie sky that gives every gathering a little more room to breathe.",
+      image: domeImage,
+      imageAlt: "The Fischer Farms dome house glowing under the North Dakota night sky",
+      moments: ["Quiet sites", "Morning light", "Field walks", "Firelight"],
+    },
+    investment: {
+      eyebrow: "A long view of the land",
+      title: "The land is not a backdrop. It is the business.",
+      text: "Fischer Farms brings together thoughtful growing, seasonal hospitality, and meaningful experiences rooted in a tangible place.",
+      image: plantingCloseup.url,
+      imageAlt: "Hands caring for the soil at Fischer Farms",
+      moments: ["Organic strawberries", "Farm stay", "Local honey", "Farm events"],
+    },
+  },
 } as const;
