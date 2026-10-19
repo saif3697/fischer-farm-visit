@@ -9,6 +9,7 @@ import {
   type ErrorComponentProps,
 } from "@tanstack/react-router";
 import { useEffect, type ReactNode } from "react";
+import { useRouterState } from "@tanstack/react-router";
 import { SiteFooter, SiteHeader } from "@/components/farm-site";
 
 import appCss from "../styles.css?url";
@@ -99,15 +100,17 @@ export const Route = createRootRouteWithContext<{ queryClient: QueryClient }>()(
 });
 
 function RootShell({ children }: { children: ReactNode }) {
+  const pathname = useRouterState({ select: (state) => state.location.pathname });
+  const isIntro = pathname === "/";
   return (
     <html lang="en">
       <head>
         <HeadContent />
       </head>
       <body>
-        <SiteHeader />
+        {!isIntro && <SiteHeader />}
         <main id="main-content" tabIndex={-1}>{children}</main>
-        <SiteFooter />
+        {!isIntro && <SiteFooter />}
         <Scripts />
       </body>
     </html>

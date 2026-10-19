@@ -1,7 +1,7 @@
 import { createFileRoute } from "@tanstack/react-router";
-import { HomePage } from "@/components/farm-site";
+import { PanoramaIntro } from "@/components/panorama-intro";
 
 export const Route = createFileRoute("/")({
-  head: () => ({ meta: [{ title: "Fischer Farms | North Dakota" }, { name: "description", content: "A warm, considered farm experience in North Dakota." }, { property: "og:title", content: "Fischer Farms | North Dakota" }, { property: "og:description", content: "A warm, considered farm experience in North Dakota." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
-  component: HomePage,
+  head: () => ({ meta: [{ title: "Fischer Farms | Enter the Farm" }, { name: "description", content: "Enter Fischer Farms, a cultivated North Dakota farm experience." }, { property: "og:title", content: "Fischer Farms | Enter the Farm" }, { property: "og:description", content: "Enter Fischer Farms, a cultivated North Dakota farm experience." }, { property: "og:type", content: "website" }, { name: "twitter:card", content: "summary_large_image" }] }),
+  component: PanoramaIntro,
 });
