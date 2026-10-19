@@ -3,7 +3,6 @@ import { AnimatePresence, motion, useReducedMotion } from "framer-motion";
 import { useEffect, useState } from "react";
 
 import { site } from "@/content";
-import { Button } from "@/components/ui/button";
 
 const letters = site.brand.split("");
 
@@ -70,10 +69,10 @@ export function PanoramaIntro() {
           <motion.div className="intro-divider" initial={cinematic ? { scaleX: 0 } : false} animate={{ scaleX: 1 }} transition={{ duration: 0.65, delay: cinematic ? 3.3 : 0 }} />
           <motion.p className="intro-subtitle" initial={cinematic ? { opacity: 0, y: 14 } : false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: cinematic ? 3.5 : 0 }}>ORGANIC STRAWBERRY FARM · NORTH DAKOTA · WADE &amp; BREANN</motion.p>
           <motion.div initial={cinematic ? { opacity: 0, y: 16 } : false} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.6, delay: cinematic ? 4 : 0 }}>
-            <Button variant="intro" size="lg" onClick={enterFarm}>Enter the farm</Button>
+            <Link className="intro-enter" to="/home" onClick={() => sessionStorage.setItem("fischer_intro_seen", "true")}>Enter the farm</Link>
           </motion.div>
         </div>
-        <Button variant="text" className="intro-skip" onClick={enterFarm}>Skip <span aria-hidden="true">→</span></Button>
+        <Link className="intro-skip" to="/home" onClick={() => sessionStorage.setItem("fischer_intro_seen", "true")}>Skip <span aria-hidden="true">→</span></Link>
         <Link className="sr-only" to="/home">Skip the introduction and enter Fischer Farms</Link>
       </motion.section>
     </AnimatePresence>
