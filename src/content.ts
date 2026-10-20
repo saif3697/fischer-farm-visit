@@ -1,7 +1,8 @@
 import domeImage from "@/assets/fischer-dome.jpg";
 import heroImage from "@/assets/fischer-hero.jpg";
-import plantingCloseup from "@/assets/fischer-planting-closeup.jpg.asset.json";
-import plantingField from "@/assets/fischer-planting-field.jpg.asset.json";
+
+const plantingCloseup = "https://i.ibb.co/4ZZVhmvT/image-png-2-K-20261019212946.jpg";
+const plantingField = "https://i.ibb.co/dXzxN7H/image-png-2-K-20261019212617.jpg";
 
 export const site = {
   brand: "FISCHER FARMS",
@@ -19,8 +20,8 @@ export const site = {
     intro: heroImage,
     strawberryField: heroImage,
     domeHouse: domeImage,
-    strawberryPortrait: plantingCloseup.url,
-    fieldPortrait: plantingField.url,
+    strawberryPortrait: plantingField,
+    fieldPortrait: plantingCloseup,
   },
   introStory: {
     eyebrow: "A quiet investment in the land",
@@ -36,7 +37,7 @@ export const site = {
       eyebrow: "Growing with intention",
       title: "The work begins in the soil.",
       text: "Each row begins with patient hands, living soil, and a belief that careful growing makes every season more meaningful.",
-      image: plantingField.url,
+      image: plantingField,
       imageAlt: "A Fischer Farms grower preparing soil and young plants by hand",
       moments: ["Soil", "Planting", "Growing", "Stewardship"],
     },
@@ -44,7 +45,7 @@ export const site = {
       eyebrow: "The rhythm of the field",
       title: "Harvest is a season you can feel.",
       text: "From the first green shoots to baskets shared around a table, harvest brings the story of the land into every hand.",
-      image: plantingCloseup.url,
+      image: plantingCloseup,
       imageAlt: "A Fischer Farms grower planting by hand beneath an open prairie sky",
       moments: ["Early growth", "First bloom", "Field harvest", "Sharing"],
     },
@@ -60,7 +61,7 @@ export const site = {
       eyebrow: "A long view of the land",
       title: "The land is not a backdrop. It is the business.",
       text: "Fischer Farms brings together thoughtful growing, seasonal hospitality, and meaningful experiences rooted in a tangible place.",
-      image: plantingCloseup.url,
+      image: plantingCloseup,
       imageAlt: "Hands caring for the soil at Fischer Farms",
       moments: ["Organic strawberries", "Farm stay", "Local honey", "Farm events"],
     },
